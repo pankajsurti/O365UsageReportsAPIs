@@ -1,0 +1,1881 @@
+{
+	"info": {
+		"_postman_id": "312ba70b-74df-42b5-b0ae-7563ffc19801",
+		"name": "0-O365 Usage Reports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "0-GET ACCESS Token",
+			"item": [
+				{
+					"name": "Get Access Token (client_credentials)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4b386835-4265-4f9d-89d2-d7d2f8a5beb0",
+								"exec": [
+									"console.log(\"Hello!!!\");",
+									"",
+									"var json = JSON.parse(responseBody);",
+									"console.log(json.access_token);",
+									"postman.setEnvironmentVariable(\"AccessToken\", json.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{ClientID}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{ClientSecret}}",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://localhost",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "https://graph.microsoft.com/.default",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://login.microsoftonline.us/{{TenantID}}/oauth2/v2.0/token",
+							"protocol": "https",
+							"host": [
+								"login",
+								"microsoftonline",
+								"us"
+							],
+							"path": [
+								"{{TenantID}}",
+								"oauth2",
+								"v2.0",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "EmailActivity",
+			"item": [
+				{
+					"name": "getEmailAppUsageUserDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getEmailAppUsageUserDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getEmailAppUsageUserDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmailActivityCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getEmailActivityCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getEmailActivityCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmailActivityUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getEmailActivityUserCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getEmailActivityUserCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "MailboxUsage",
+			"item": [
+				{
+					"name": "getMailboxUsageDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getMailboxUsageDetail(period='D7')?$format=application/json",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getMailboxUsageDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMailboxUsageMailboxCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getMailboxUsageMailboxCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getMailboxUsageMailboxCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMailboxUsageQuotaStatusMailboxCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getMailboxUsageQuotaStatusMailboxCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getMailboxUsageQuotaStatusMailboxCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMailboxUsageStorage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getMailboxUsageStorage(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getMailboxUsageStorage(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "EmailAppUsage",
+			"item": [
+				{
+					"name": "getEmailAppUsageUserDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getEmailAppUsageUserDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getEmailAppUsageUserDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmailAppUsageAppsUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getMailboxUsageDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getMailboxUsageDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmailAppUsageUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getEmailAppUsageUserCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getEmailAppUsageUserCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEmailAppUsageVersionsUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getEmailAppUsageVersionsUserCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getEmailAppUsageVersionsUserCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Office365Activations",
+			"item": [
+				{
+					"name": "getOffice365ActivationsUserDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365ActivationsUserDetail?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365ActivationsUserDetail"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOffice365ActivationCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365ActivationCounts?$format=application/json&$top=100",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365ActivationCounts"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOffice365ActivationsUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365ActivationsUserCounts?$format=application/json&$top=100",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365ActivationsUserCounts"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Office365ActiveUser",
+			"item": [
+				{
+					"name": "getOffice365ActiveUserDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365ActiveUserDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365ActiveUserDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOffice365ActiveUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365ActiveUserCounts(period='D90')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365ActiveUserCounts(period='D90')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the count of daily active users in the reporting period by product."
+					},
+					"response": []
+				},
+				{
+					"name": "getOffice365ServicesUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365ServicesUserCounts(period='D90')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365ServicesUserCounts(period='D90')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the count of users by activity type and service."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Office365GroupsActivity",
+			"item": [
+				{
+					"name": "getOffice365GroupsActivityDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365GroupsActivityDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365GroupsActivityDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOffice365GroupsActivityCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365GroupsActivityCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365GroupsActivityCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the number of group activities across group workloads."
+					},
+					"response": []
+				},
+				{
+					"name": "getOffice365GroupsActivityGroupCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365GroupsActivityGroupCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365GroupsActivityGroupCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the daily total number of groups and how many of them were active based on email conversations, Yammer posts, and SharePoint file activities."
+					},
+					"response": []
+				},
+				{
+					"name": "getOffice365GroupsActivityStorage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365GroupsActivityStorage(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365GroupsActivityStorage(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the total storage used across all group mailboxes and group sites."
+					},
+					"response": []
+				},
+				{
+					"name": "getOffice365GroupsActivityFileCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOffice365GroupsActivityFileCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOffice365GroupsActivityFileCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the total number of files and how many of them were active across all group sites associated with an Office 365 Group."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OneDriveActivity",
+			"item": [
+				{
+					"name": "getOneDriveActivityUserDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOneDriveActivityUserDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOneDriveActivityUserDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get details about OneDrive activity by user."
+					},
+					"response": []
+				},
+				{
+					"name": "getOneDriveActivityUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOneDriveActivityUserCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOneDriveActivityUserCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the trend in the number of active OneDrive users."
+					},
+					"response": []
+				},
+				{
+					"name": "getOneDriveActivityFileCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOneDriveActivityFileCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOneDriveActivityFileCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the number of unique, licensed users that performed file interactions against any OneDrive account."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OneDriveUsage",
+			"item": [
+				{
+					"name": "getOneDriveUsageAccountDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOneDriveUsageAccountDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOneDriveUsageAccountDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get details about OneDrive usage by account."
+					},
+					"response": []
+				},
+				{
+					"name": "getOneDriveUsageAccountCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOneDriveUsageAccountCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOneDriveUsageAccountCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the trend in the number of active OneDrive for Business sites. Any site on which users viewed, modified, uploaded, downloaded, shared, or synced files is considered an active site."
+					},
+					"response": []
+				},
+				{
+					"name": "getOneDriveUsageFileCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOneDriveUsageFileCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOneDriveUsageFileCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the total number of files across all sites and how many are active files. A file is considered active if it has been saved, synced, modified, or shared within the specified time period."
+					},
+					"response": []
+				},
+				{
+					"name": "getOneDriveUsageStorage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getOneDriveUsageStorage(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getOneDriveUsageStorage(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the trend on the amount of storage you are using in OneDrive for Business."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "SharePointActivity",
+			"item": [
+				{
+					"name": "getSharePointActivityUserDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointActivityUserDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointActivityUserDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get details about SharePoint activity by user."
+					},
+					"response": []
+				},
+				{
+					"name": "getSharePointActivityFileCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointActivityFileCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointActivityFileCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the number of unique, licensed users who interacted with files stored on SharePoint sites."
+					},
+					"response": []
+				},
+				{
+					"name": "getSharePointActivityUserCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointActivityUserCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointActivityUserCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the trend in the number of active users. A user is considered active if he or she has executed a file activity (save, sync, modify, or share) or visited a page within the specified time period."
+					},
+					"response": []
+				},
+				{
+					"name": "getSharePointActivityPages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointActivityPages(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointActivityPages(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the number of unique pages visited by users."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "SharePointSiteUsage",
+			"item": [
+				{
+					"name": "getSharePointSiteUsageDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointSiteUsageDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointSiteUsageDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get details about SharePoint site usage."
+					},
+					"response": []
+				},
+				{
+					"name": "getSharePointSiteUsageFileCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointSiteUsageFileCounts(period='D180')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointSiteUsageFileCounts(period='D180')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the total number of files across all sites and the number of active files. A file (user or system) is considered active if it has been saved, synced, modified, or shared within the specified time period."
+					},
+					"response": []
+				},
+				{
+					"name": "getSharePointSiteUsageSiteCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointSiteUsageSiteCounts(period='D180')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointSiteUsageSiteCounts(period='D180')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the total number of files across all sites and the number of active files. A file (user or system) is considered active if it has been saved, synced, modified, or shared within the specified time period."
+					},
+					"response": []
+				},
+				{
+					"name": "getSharePointSiteUsageStorage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointSiteUsageStorage(period='D180')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointSiteUsageStorage(period='D180')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the trend of storage allocated and consumed during the reporting period."
+					},
+					"response": []
+				},
+				{
+					"name": "getSharePointSiteUsagePages",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSharePointSiteUsagePages(period='D180')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSharePointSiteUsagePages(period='D180')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the number of pages viewed across all sites."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Sign-In Summary",
+			"item": [
+				{
+					"name": "Get applicationSignInSummary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getAzureADApplicationSignInSummary(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getAzureADApplicationSignInSummary(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get details about SharePoint site usage."
+					},
+					"response": []
+				},
+				{
+					"name": "credentialUserRegistrationCount resource type",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getCredentialUserRegistrationCount?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getCredentialUserRegistrationCount"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get details about SharePoint site usage."
+					},
+					"response": []
+				},
+				{
+					"name": "getCredentialUsageSummary",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getCredentialUsageSummary(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getCredentialUsageSummary(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get details about SharePoint site usage."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "SfbActivity",
+			"item": [
+				{
+					"name": "getSkypeForBusinessActivityUserDetail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSkypeForBusinessActivityUserDetail(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSkypeForBusinessActivityUserDetail(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get details about Skype for Business activity by user."
+					},
+					"response": []
+				},
+				{
+					"name": "getSkypeForBusinessActivityCounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{AccessToken}}"
+							}
+						],
+						"url": {
+							"raw": "https://graph.microsoft.com/beta/reports/getSkypeForBusinessActivityCounts(period='D7')?$format=application/json&$top=10",
+							"protocol": "https",
+							"host": [
+								"graph",
+								"microsoft",
+								"com"
+							],
+							"path": [
+								"beta",
+								"reports",
+								"getSkypeForBusinessActivityCounts(period='D7')"
+							],
+							"query": [
+								{
+									"key": "$format",
+									"value": "application/json"
+								},
+								{
+									"key": "$top",
+									"value": "10"
+								}
+							]
+						},
+						"description": "Get the trends on how many users organized and participated in conference sessions held in your organization through Skype for Business. The report also includes the number of peer-to-peer sessions."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "SfbDeviceUsage",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "SfbOrganizerActivity",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "SfbParticipantActivity",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "SfbP2PActivity",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "YammerActivity",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "YammerDeviceUsage",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "YammerGroupsActivity",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "O365 UserActivity",
+			"item": [],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d469bcba-c28b-4330-a4c1-66d47d787161",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "cc8a1f45-2096-4ee2-b9c4-a52594449a8a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
